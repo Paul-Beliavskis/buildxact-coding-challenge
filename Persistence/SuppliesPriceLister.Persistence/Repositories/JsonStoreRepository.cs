@@ -9,9 +9,11 @@ namespace SuppliesPriceLister.Persistence.Repositories
     {
         public List<Partner> GetPartners()
         {
-            var data = File.ReadAllLines("../Database/megacorp.json");
+            var data = File.ReadAllText("./Database/megacorp.json");
 
-            return null;
+            var partnerList = Newtonsoft.Json.JsonConvert.DeserializeObject<PartnerList>(data);
+
+            return partnerList.Partners;
         }
     }
 }

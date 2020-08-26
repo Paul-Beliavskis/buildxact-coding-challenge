@@ -12,4 +12,14 @@
     <None Remove="megacorp.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="5.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SuppliesPriceLister.Application\SuppliesPriceLister.Application.csproj" />
+  </ItemGroup>
+
 </Project>

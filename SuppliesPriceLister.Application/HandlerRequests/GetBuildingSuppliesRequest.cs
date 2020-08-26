@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using SuppliesPriceLister.Application.Enums;
+using SuppliesPriceLister.Application.HandlerResponses;
 
-namespace buildxact_supplies
+namespace SuppliesPriceLister.Application.HandlerRequests
 {
     public class GetBuildingSuppliesRequest : IRequest<GetBuildingSuppliesResponse>
     {
