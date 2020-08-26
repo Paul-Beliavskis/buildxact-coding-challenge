@@ -5,6 +5,6 @@ namespace SuppliesPriceLister.Application.HandlerResponses
 {
     public class GetBuildingSuppliesResponse
     {
-        public List<Supply> Supplies { get; set; }
+        public IEnumerable<Supply> Supplies { get; set; }
     }
 }

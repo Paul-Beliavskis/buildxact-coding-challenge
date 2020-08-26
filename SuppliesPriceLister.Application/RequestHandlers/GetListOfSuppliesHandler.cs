@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +31,7 @@ namespace SuppliesPriceLister.Application.RequestHandlers
                     {
                         SupplyId = supply.Id.ToString(),
                         ItemName = supply.MaterialType,
-                        Price = supply.PriceInCents
+                        Price = ConvertToAUD(supply.PriceInCents)
                     };
 
                     supplyList.Add(supplyModel);
@@ -47,19 +49,34 @@ namespace SuppliesPriceLister.Application.RequestHandlers
 
             supplyList.AddRange(humphriesSupplyList);
 
-            IEnumerable<Supply> sortedSupplyList;
+            IEnumerable<Supply> sortedSupplyList = new List<Supply>();
 
             if (request.SortOrder == Enums.SortOrderEnum.Desc)
             {
-                sortedSupplyList = supplyList.OrderByDescending(i => i);
+                sortedSupplyList = from supply in supplyList
+                                   orderby supply.Price descending
+                                   select supply;
             }
 
             var response = new GetBuildingSuppliesResponse
             {
-                Supplies = supplyList
+                Supplies = sortedSupplyList
             };
 
             return Task.FromResult(response);
+        }
+
+        private double ConvertToAUD(int usCents)
+        {
+            var configFile = File.ReadAllText("./appsettings.json");
+
+            var exchangeRateModel = Newtonsoft.Json.JsonConvert.DeserializeObject<CurrencyExchangeModel>(configFile);
+
+            var aud = usCents / 100 * exchangeRateModel.AudUsdExchangeRate;
+
+            var roundedAud = Math.Round(aud, 2);
+
+            return roundedAud;
         }
     }
 }
