@@ -10,7 +10,7 @@ namespace SuppliesPriceLister
     {
         private static IContainer Container { get; set; }
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // Create the builder with which components/services are registered.
             var builder = new ContainerBuilder();
@@ -28,13 +28,13 @@ namespace SuppliesPriceLister
                     SortOrder = Application.Enums.SortOrderEnum.Desc
                 };
 
-                //var response = await requestHandler.Send(request);
+                var response = await requestHandler.Send(request);
 
 
-                //foreach (var supply in response.Supplies)
-                //{
-                //    Console.WriteLine($"Supply Id: {supply.SupplyId}, Supply name: {supply.ItemName}, Supply price: {supply.Price}");
-                //}
+                foreach (var supply in response.Supplies)
+                {
+                    Console.WriteLine($"Supply Id: {supply.SupplyId}, Supply name: {supply.ItemName}, Supply price: {supply.Price}");
+                }
 
                 Console.Read();
             }
