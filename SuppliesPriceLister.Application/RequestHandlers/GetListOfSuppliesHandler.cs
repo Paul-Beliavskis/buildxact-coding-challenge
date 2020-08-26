@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -15,6 +16,7 @@ namespace SuppliesPriceLister.Application.RequestHandlers
         {
             //Normally I would use DI here but to save time will do a dodgy
             var jsonRepository = new JsonStoreRepository();
+            var csvStoreRepository = new CsvStoreRepository();
 
             var partners = jsonRepository.GetPartners();
 
@@ -33,6 +35,23 @@ namespace SuppliesPriceLister.Application.RequestHandlers
                     supplyList.Add(supplyModel);
                 }
 
+            }
+
+            var humphriesSupplyList = csvStoreRepository.GetHumphriesSupplyList()
+            .Select(x => new Supply
+            {
+                ItemName = x.Description,
+                SupplyId = x.HumphriesSupplyId,
+                Price = x.CostInAUD
+            });
+
+            supplyList.AddRange(humphriesSupplyList);
+
+            IEnumerable<Supply> sortedSupplyList;
+
+            if (request.SortOrder == Enums.SortOrderEnum.Desc)
+            {
+                sortedSupplyList = supplyList.OrderByDescending(i => i);
             }
 
             var response = new GetBuildingSuppliesResponse
