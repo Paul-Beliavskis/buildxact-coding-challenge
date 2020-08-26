@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuppliesPriceLister.Persist
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuppliesPriceLister.Persistence.Tests.Unit", "Persistence\SuppliesPriceLister.Persistence.Tests.Unit\SuppliesPriceLister.Persistence.Tests.Unit.csproj", "{1B97FC6A-05DF-41BE-A7C7-113616B8AEAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuppliesPriceLister.Application", "SuppliesPriceLister.Application\SuppliesPriceLister.Application.csproj", "{A0F81189-5B7A-4EC2-89DE-D25272E18C1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuppliesPriceLister.Application", "Application\SuppliesPriceLister.Application\SuppliesPriceLister.Application.csproj", "{A0F81189-5B7A-4EC2-89DE-D25272E18C1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

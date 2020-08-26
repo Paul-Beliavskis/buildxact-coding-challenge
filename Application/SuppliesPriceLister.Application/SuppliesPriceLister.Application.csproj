@@ -1,12 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\SuppliesPriceLister.Domain\SuppliesPriceLister.Domain.csproj" />
+    <ProjectReference Include="..\..\Persistence\SuppliesPriceLister.Persistence\SuppliesPriceLister.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
